@@ -18,7 +18,7 @@ npm i nativescript-ngx-magic --save
 
 ## Usage
 
-1. Use `Component` from `nativescript-ngx-magic` instead of `@angular/core`. [Why?](#why-different-component)
+1. Use `Component` from `@wwwalkerrun/nativescript-ngx-magic` instead of `@angular/core`. [Why?](#why-different-component)
 2. Create NativeScript views ending with `.tns.html` (and/or styles ending with `.tns.css`) for each of your component's. [How?](#how-to-create-nativescript-views)
 3. [Run your truly *native* mobile app with NativeScript!](#run-for-first-time)
 
@@ -27,13 +27,34 @@ npm i nativescript-ngx-magic --save
 A sample root component, **app.component.ts**:
 
 ```
-import { Component } from 'nativescript-ngx-magic';
+import { Component } from '@wwwalkerrun/nativescript-ngx-magic';
 
 @Component({
   selector: 'app',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {}
+```
+
+Then create a `.tns.html` NativeScript view template for this component, for example:
+
+* `app.component.tns.html`:
+
+```
+<ActionBar title="Magic!" icon="" class="action-bar">
+</ActionBar>
+<StackLayout class="p-20">
+    <Label text="NativeScript is Neat." class="h1 text-center"></Label>
+</StackLayout>
+```
+
+Then if your component has `styleUrls` defined, you can create a `.tns.css` file, for example:
+
+* `app.component.tns.css`:
+
+```
+// any custom css you want to use with your {N} view
 ```
 
 ### Run for first time!
@@ -75,7 +96,7 @@ You would then create a new file in `app.component.tns.html` like this:
 You can **also** use platform specific views if desired with the `platformSpecific` Component metadata:
 
 ```
-import { Component } from 'nativescript-ngx-magic';
+import { Component } from '@wwwalkerrun/nativescript-ngx-magic';
 
 @Component({
   selector: 'app',
@@ -119,7 +140,7 @@ Currently you cannot use custom component decorators with AoT compilation. This 
 import { Component } from '@angular/core';
 
 // just comment this out and use Component from '@angular/core'
-// import { Component } from 'nativescript-ngx-magic';
+// import { Component } from '@wwwalkerrun/nativescript-ngx-magic';
 
 @Component({
   // etc.

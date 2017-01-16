@@ -15,7 +15,6 @@ export class MagicService {
 
   public static TEMPLATE_URL(path: string, platformSpecific?: boolean): string {
     if (MagicService.IS_NATIVESCRIPT()) {
-      console.log('is {N}!');
       let filepath = getFilepath(path);
       let platform = getPlatform(platformSpecific);
       return `${filepath}.${platform}.html`;
@@ -37,7 +36,6 @@ export class MagicService {
   }
 
   public static IS_NATIVESCRIPT() {
-    console.log('wha?');
     return (MagicService.IS_IOS() || MagicService.IS_ANDROID());
   }
 

@@ -9,11 +9,11 @@ var fs = require('fs');
 var cp = require('child_process');
 var path = require('path');
 
-var isRanFromNativeScript = fs.existsSync("../../app/App_Resources");
-var hasNativeScript = fs.existsSync("../../nativescript");
+var isRanFromNativeScript = fs.existsSync("../../../app/App_Resources");
+var hasNativeScript = fs.existsSync("../../../nativescript");
 
 // Figure out angular Seed Path for symlink...
-var angularSeedPath = '../../src/';
+var angularSeedPath = '../../../src/';
 var seeds = ['client', 'app'];
 var seedId = 0;
 
@@ -24,7 +24,7 @@ for (var i=0;i<seeds.length;i++) {
     }
 }
 angularSeedPath += seeds[seedId] + "/";
-var nativescriptClientPath = '../../nativescript/app/' + seeds[seedId] + "/";
+var nativescriptClientPath = '../../../nativescript/app/' + seeds[seedId] + "/";
 
 if (debugging) {
     console.log("Path is:", angularSeedPath, nativescriptClientPath);
@@ -42,14 +42,14 @@ if (process.argv.length > 2) {
 
 if (!hasNativeScript && !isRanFromNativeScript) {
     console.log("Installing NativeScript Angular Template...");
-    cp.execSync('tns create nativescript --template  https://github.com/NathanWalker/template-hello-world-ng.git', {cwd: '../..'});
+    cp.execSync('tns create nativescript --template  https://github.com/NathanWalker/template-hello-world-ng.git', {cwd: '../../..'});
     console.log("Installing NativeScript support files...");
-    cp.execSync('npm install', {cwd: '../../nativescript'});
+    cp.execSync('npm install', {cwd: '../../../nativescript'});
 
     console.log("Installing support files");
     if (process.platform === 'darwin') {
         try {
-            cp.execSync('npm install image-to-ascii-cli', {cwd: '../..'});
+            cp.execSync('npm install image-to-ascii-cli', {cwd: '../../..'});
         }
         catch (Err) {
             console.log("Install Error", Err);
@@ -58,19 +58,19 @@ if (!hasNativeScript && !isRanFromNativeScript) {
 
     console.log("Configuring...");
     if (debugging) {
-        cp.execSync('tns plugin add ../node_modules/@wwwalkerrun/nativescript-ngx-magic', {cwd: '../../nativescript'});
+        cp.execSync('tns plugin add ../node_modules/@wwwalkerrun/nativescript-ngx-magic', {cwd: '../../../nativescript'});
     } else {
-        cp.execSync('tns plugin add @wwwalkerrun/nativescript-ngx-magic', {cwd: '../../nativescript'});
+        cp.execSync('tns plugin add @wwwalkerrun/nativescript-ngx-magic', {cwd: '../../../nativescript'});
     }
 
     // remove sample component
-    if (fs.existsSync('../../nativescript/app/app.component.ts')) {
+    if (fs.existsSync('../../../nativescript/app/app.component.ts')) {
         console.log("Removing sample component");
-        fs.unlinkSync('../../nativescript/app/app.component.ts');
+        fs.unlinkSync('../../../nativescript/app/app.component.ts');
     }
-  if (fs.existsSync('../../nativescript/app/app.component.html')) {
+  if (fs.existsSync('../../../nativescript/app/app.component.html')) {
         console.log("Removing sample component html");
-        fs.unlinkSync('../../nativescript/app/app.component.html');
+        fs.unlinkSync('../../../nativescript/app/app.component.html');
     }
 
 
@@ -95,7 +95,7 @@ if (!hasNativeScript && !isRanFromNativeScript) {
     if (process.platform === "darwin") {
         // image to ascii uses GM which may not be installed, so if it isn't installed; don't print the error message
 		try {
-          var ascii = cp.execSync('image-to-ascii -i https://cdn.filestackcontent.com/XXMT4f8S8OGngNsJj0pr', {cwd: '../image-to-ascii-cli/bin/'}).toString();
+          var ascii = cp.execSync('image-to-ascii -i https://cdn.filestackcontent.com/XXMT4f8S8OGngNsJj0pr', {cwd: '../../image-to-ascii-cli/bin/'}).toString();
           if (ascii.length > 30) {
             console.log(ascii);
           }
@@ -127,7 +127,7 @@ if (isRanFromNativeScript) {
         fixMainFile( figureOutRootComponent());
 
         // when being run from inside {N} app, the directory is different
-        var srcRoot = '../../../src/';
+        var srcRoot = '../../../../src/';
         for (var i=0;i<seeds.length;i++) {
             if (fs.existsSync(srcRoot + seeds[i])) {
                 seedId = i; break;
@@ -150,7 +150,7 @@ return 0;
  * @returns {string}
  */
 function figureOutRootComponent() {
-    var rootComponents = ['../../../src/app/app.module.ts', '../../../src/app.ts', '../../../boot.ts', '../../../src/main.ts'];
+    var rootComponents = ['../../../../src/app/app.module.ts', '../../../../src/app.ts', '../../../../boot.ts', '../../../../src/main.ts'];
     for (var i=0;i<rootComponents.length; i++) {
         if (fs.existsSync(rootComponents[i])) {
             var result = processBootStrap(rootComponents[i]);
@@ -266,7 +266,7 @@ function createSymLink() {
  * This fixes the TS Config file in the nativescript folder
  */
 function fixTsConfig() {
-    var tsConfig={}, tsFile = '../../tsconfig.json';
+    var tsConfig={}, tsFile = '../../../tsconfig.json';
     if (fs.existsSync(tsFile)) {
         tsConfig = require(tsFile);
     }
@@ -321,7 +321,7 @@ function fixTsConfig() {
  * This fixes the references file to work with TS 2.0 in the nativescript folder
  */
 function fixRefFile() {
-    var existingRef='', refFile = '../../references.d.ts';
+    var existingRef='', refFile = '../../../references.d.ts';
     if (fs.existsSync(refFile)) {
         existingRef = fs.readFileSync(refFile).toString();
     }
@@ -340,61 +340,61 @@ function fixRefFile() {
  * Fix the NativeScript Package file
  */
 function fixNativeScriptPackage() {
-    var packageJSON = {}, packageFile = '../../package.json';
-    packageJSON.name = "NativeScriptApp";
-    packageJSON.version = "0.0.0";
+    // var packageJSON = {}, packageFile = '../../../package.json';
+    // packageJSON.name = "NativeScriptApp";
+    // packageJSON.version = "0.0.0";
 
-    // var AngularJSON = {};
-    if (fs.existsSync(packageFile)) {
-        packageJSON = require(packageFile);
-    } else {
-        console.log("This should not happen, your are missing your package.json file!");
-        return;
-    }
-    // if (fs.existsSync('../angular2/package.json')) {
-    //     AngularJSON = require('../angular2/package.json');
+    // // var AngularJSON = {};
+    // if (fs.existsSync(packageFile)) {
+    //     packageJSON = require(packageFile);
     // } else {
-    //     // Copied from the Angular2.0.0-beta-16 package.json, this is a fall back
-    //     AngularJSON.peerDependencies = {
-    //         "es6-shim": "^0.35.0",
-    //         "reflect-metadata": "0.1.2",
-    //         "rxjs": "5.0.0-beta.6",
-    //         "zone.js": "^0.6.12"
-    //     };
+    //     console.log("This should not happen, your are missing your package.json file!");
+    //     return;
     // }
+    // // if (fs.existsSync('../angular2/package.json')) {
+    // //     AngularJSON = require('../angular2/package.json');
+    // // } else {
+    // //     // Copied from the Angular2.0.0-beta-16 package.json, this is a fall back
+    // //     AngularJSON.peerDependencies = {
+    // //         "es6-shim": "^0.35.0",
+    // //         "reflect-metadata": "0.1.2",
+    // //         "rxjs": "5.0.0-beta.6",
+    // //         "zone.js": "^0.6.12"
+    // //     };
+    // // }
 
-    packageJSON.nativescript['tns-ios'] = { version: "2.4.0" };
-    packageJSON.nativescript['tns-android'] = {version: "2.4.1" };
+    // packageJSON.nativescript['tns-ios'] = { version: "2.4.0" };
+    // packageJSON.nativescript['tns-android'] = {version: "2.4.1" };
 
-    // Copy over all the Peer Dependencies
-    // for (var key in AngularJSON.peerDependencies) {
-    //     if (AngularJSON.peerDependencies.hasOwnProperty(key)) {
-    //         packageJSON.dependencies[key] = AngularJSON.peerDependencies[key];
-    //     }
+    // // Copy over all the Peer Dependencies
+    // // for (var key in AngularJSON.peerDependencies) {
+    // //     if (AngularJSON.peerDependencies.hasOwnProperty(key)) {
+    // //         packageJSON.dependencies[key] = AngularJSON.peerDependencies[key];
+    // //     }
+    // // }
+
+
+    // // TODO: Can we get these from somewhere rather than hardcoding them, maybe need to pull/download the package.json from the default template?
+    // if (!packageJSON.devDependencies) {
+    //     packageJSON.devDependencies = {};
     // }
+    // packageJSON.devDependencies["@types/jasmine"] = "^2.5.35";
+    // packageJSON.devDependencies["babel-traverse"] = "6.12.0";
+    // packageJSON.devDependencies["babel-types"] = "6.11.1";
+    // packageJSON.devDependencies.babylon = "6.8.4";
+    // packageJSON.devDependencies.filewalker = "0.1.2";
+    // packageJSON.devDependencies.lazy = "1.0.11";
+    // // packageJSON.devDependencies["nativescript-dev-typescript"] = "^0.3.2";
+    // packageJSON.devDependencies.typescript = "^2.0.10";
 
-
-    // TODO: Can we get these from somewhere rather than hardcoding them, maybe need to pull/download the package.json from the default template?
-    if (!packageJSON.devDependencies) {
-        packageJSON.devDependencies = {};
-    }
-    packageJSON.devDependencies["@types/jasmine"] = "^2.5.35";
-    packageJSON.devDependencies["babel-traverse"] = "6.12.0";
-    packageJSON.devDependencies["babel-types"] = "6.11.1";
-    packageJSON.devDependencies.babylon = "6.8.4";
-    packageJSON.devDependencies.filewalker = "0.1.2";
-    packageJSON.devDependencies.lazy = "1.0.11";
-    // packageJSON.devDependencies["nativescript-dev-typescript"] = "^0.3.2";
-    packageJSON.devDependencies.typescript = "^2.0.2";
-
-    fs.writeFileSync(packageFile, JSON.stringify(packageJSON, null, 4), 'utf8');
+    // fs.writeFileSync(packageFile, JSON.stringify(packageJSON, null, 4), 'utf8');
 }
 
 /**
  * Fix the Angular Package
  */
 function fixAngularPackage() {
-    var packageJSON = {}, packageFile = '../../../package.json';
+    var packageJSON = {}, packageFile = '../../../../package.json';
     if (fs.existsSync(packageFile)) {
         packageJSON = require(packageFile);
     } else {
@@ -406,9 +406,9 @@ function fixAngularPackage() {
         packageJSON.scripts = {};
     }
 
-    packageJSON.scripts["start.ios"] = "cd nativescript && tns emulate ios";
+    packageJSON.scripts["start.ios"] = "cd nativescript && tns run ios --emulator";
     packageJSON.scripts["start.livesync.ios"] = "cd nativescript && tns livesync ios --emulator --watch";
-    packageJSON.scripts["start.android"] = "cd nativescript && tns emulate android";
+    packageJSON.scripts["start.android"] = "cd nativescript && tns run android --emulator";
     packageJSON.scripts["start.livesync.android"] = "cd nativescript && tns livesync android --emulator --watch";
 
     fs.writeFileSync(packageFile, JSON.stringify(packageJSON, null, 4), 'utf8');
@@ -419,29 +419,29 @@ function fixAngularPackage() {
  * @param component
  */
 function fixMainFile(component) {
-  var mainTS = '', mainFile = '../../app/main.ts';
-  if (fs.existsSync(mainFile)) {
-    mainTS = fs.readFileSync(mainFile).toString();
-  }
+  // var mainTS = '', mainFile = '../../../app/main.ts';
+  // if (fs.existsSync(mainFile)) {
+  //   mainTS = fs.readFileSync(mainFile).toString();
+  // }
 
-  if (mainTS.indexOf('MagicService') === -1) {
-    // has not been previously modified
-    var fix = '// this import should be first in order to load some required settings (like globals and reflect-metadata)\n' +
-      'import { platformNativeScriptDynamic, NativeScriptModule } from "nativescript-angular/platform";\n' +
-      'import { NgModule } from "@angular/core";\n' +
-      'import { AppComponent } from "./app/app.component";\n' +
-      '\n' +
-      '@NgModule({\n' +
-      '  declarations: [AppComponent],\n' +
-      '  bootstrap: [AppComponent],\n' +
-      '   imports: [NativeScriptModule],\n' +
-      '})\n' +
-      'class AppComponentModule {}\n\n' +
-      'platformNativeScriptDynamic().bootstrapModule(AppComponentModule);';
+  // if (mainTS.indexOf('MagicService') === -1) {
+  //   // has not been previously modified
+  //   var fix = '// this import should be first in order to load some required settings (like globals and reflect-metadata)\n' +
+  //     'import { platformNativeScriptDynamic, NativeScriptModule } from "nativescript-angular/platform";\n' +
+  //     'import { NgModule } from "@angular/core";\n' +
+  //     'import { AppComponent } from "./app/app.component";\n' +
+  //     '\n' +
+  //     '@NgModule({\n' +
+  //     '  declarations: [AppComponent],\n' +
+  //     '  bootstrap: [AppComponent],\n' +
+  //     '   imports: [NativeScriptModule],\n' +
+  //     '})\n' +
+  //     'class AppComponentModule {}\n\n' +
+  //     'platformNativeScriptDynamic().bootstrapModule(AppComponentModule);';
 
 
-    fs.writeFileSync(mainFile, fix, 'utf8');
-  }
+  //   fs.writeFileSync(mainFile, fix, 'utf8');
+  // }
 }
 
 /**
@@ -449,7 +449,7 @@ function fixMainFile(component) {
  * @param path
  */
 function fixGitIgnore(ignorePattern) {
-  var fileString = '', ignoreFile = '../../../.gitignore';
+  var fileString = '', ignoreFile = '../../../../.gitignore';
   if (fs.existsSync(ignoreFile)) {
     fileString = fs.readFileSync(ignoreFile).toString();
   }

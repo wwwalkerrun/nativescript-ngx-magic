@@ -42,7 +42,7 @@ if (process.argv.length > 2) {
 
 if (!hasNativeScript && !isRanFromNativeScript) {
     console.log("Installing NativeScript Angular Template...");
-    cp.execSync('tns create nativescript --template  https://github.com/NativeScript/template-hello-world-ng', {cwd: '../..'});
+    cp.execSync('tns create nativescript --template  https://github.com/NathanWalker/template-hello-world-ng.git', {cwd: '../..'});
     console.log("Installing NativeScript support files...");
     cp.execSync('npm install', {cwd: '../../nativescript'});
 
@@ -471,7 +471,7 @@ function fixGitIgnore(ignorePattern) {
 function displayFinalHelp()
 {
     console.log("-------------- Welcome to the Magical World of NativeScript -----------------------------");
-    console.log("To finish, follow this guide https://github.com/NathanWalker/nativescript-ngx-magic#usage");
+    console.log("To finish, follow this guide https://github.com/wwwalkerrun/nativescript-ngx-magic#usage");
     console.log("After you have completed the steps in the usage guide, you can then:");
     console.log("");
     console.log("Run your app in the iOS Simulator with these options:");

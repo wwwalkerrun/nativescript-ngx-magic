@@ -128,7 +128,7 @@ You can [learn more here](http://angularjs.blogspot.com/2016/03/code-reuse-in-an
 `Component` from `nativescript-ngx-magic` is identical to `Component` from `@angular/core`, except it automatically uses NativeScript views when your app runs in a NativeScript mobile app.
 
 The library provides a custom `Decorator` under the hood.
-Feel free to [check it out here](https://github.com/NathanWalker/nativescript-ngx-magic/blob/master/src/client/plugin/decorators/magic.component.ts) and it uses a [utility here](https://github.com/NathanWalker/nativescript-ngx-magic/blob/master/src/client/plugin/decorators/utils.ts).
+Feel free to [check it out here](https://github.com/wwwalkerrun/nativescript-ngx-magic/blob/master/src/app/plugin/decorators/magic.component.ts) and it uses a [utility here](https://github.com/wwwalkerrun/nativescript-ngx-magic/blob/master/src/app/plugin/decorators/utils.ts).
 
 You can see more elaborate use cases of this magic with [angular-seed-advanced](https://github.com/NathanWalker/angular-seed-advanced).
 

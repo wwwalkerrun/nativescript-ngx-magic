@@ -13,7 +13,7 @@ Magically drop a [NativeScript](https://www.nativescript.org/) app into your exi
 ## Install
 
 ```
-npm i nativescript-ngx-magic --save
+npm i @wwwalkerrun/nativescript-ngx-magic --save
 ```
 
 ## Usage

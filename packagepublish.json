@@ -1,6 +1,6 @@
 {
   "name": "@wwwalkerrun/nativescript-ngx-magic",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Magically integrate your Angular web app with NativeScript.",
   "main": "nativescript-ngx-magic",
   "typings": "nativescript-ngx-magic.d.ts",

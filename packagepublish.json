@@ -1,0 +1,28 @@
+{
+  "name": "@wwwalkerrun/nativescript-ngx-magic",
+  "version": "2.0.0",
+  "description": "Magically integrate your Angular web app with NativeScript.",
+  "main": "nativescript-ngx-magic",
+  "typings": "nativescript-ngx-magic.d.ts",
+  "author": "Nathan Walker <walkerrunpdx@gmail.com> (http://github.com/NathanWalker)",
+  "contributors": ["Nathanael Anderson <nathan@master-technology> (http://github.com/NathanaelA)"],
+  "repository": {
+    "url": "https://github.com/wwwalkerrun/nativescript-ngx-magic"
+  },
+  "keywords": [
+    "angular",
+    "nativescript",
+    "ngx",
+    "ng2"
+  ],
+  "nativescript": {
+    "platforms": {
+      "ios": "2.4.0",
+      "android":  "2.4.1"
+    }
+  },
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "node install.js"
+  }
+}

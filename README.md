@@ -116,8 +116,9 @@ You can **also** use platform specific views if desired with the `platformSpecif
 import { Component } from '@wwwalkerrun/nativescript-ngx-magic';
 
 @Component({
+  moduleId: module.id,
   selector: 'app',
-  templateUrl: './app.component.html',
+  templateUrl: 'app.component.html',
   platformSpecific: true
 })
 export class AppComponent {}

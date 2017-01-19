@@ -1,10 +1,7 @@
 declare var NSObject, NSString, android, java;
 
 const getFilepath = function (path: string) {
-  path = path.replace('./', './app/');
-  let paths = path.split('.');
-  paths.splice(-1);
-  return paths.join('.');
+  return path.replace('.html', '').replace('.css', '');
 };
 
 const getPlatform = function (platformSpecific: boolean) {

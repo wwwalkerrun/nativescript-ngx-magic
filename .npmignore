@@ -39,6 +39,10 @@ Thumbs.db
 !*.d.ts
 nativescript
 src
+src/public/img
+src/public/index.html
+src/style/app.scss
+src/app/app.*
 !src/app/plugin/decorators/magic.component.js
 !src/app/plugin/decorators/utils.js
 !src/app/plugin/services/magic.service.js

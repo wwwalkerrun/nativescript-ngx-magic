@@ -9,6 +9,7 @@ Magically drop a [NativeScript](https://www.nativescript.org/) app into your exi
 
 * [Supported projects that can use magic](#supported-projects)
 * [Watch video on how to integrate with Angular CLI](http://www.nativescriptsnacks.com/videos/2016/05/12/magic-scaffolding.html)
+  * The video is slightly outdated with latest published version but still very applicable.
 
 ## Install
 
@@ -20,19 +21,35 @@ npm i @wwwalkerrun/nativescript-ngx-magic --save
 
 1. Use `Component` from `@wwwalkerrun/nativescript-ngx-magic` instead of `@angular/core`. [Why?](#why-different-component)
 2. Create NativeScript views ending with `.tns.html` (and/or styles ending with `.tns.css`) for each of your component's. [How?](#how-to-create-nativescript-views)
-3. [Run your truly *native* mobile app with NativeScript!](#run-for-first-time)
+3. Ensure your components are declared and routes (if any) are defined in `nativescript/app/app.module.ts`. NativeScript's root `AppModule` is defined seperately to allow you to hook into and/or load distinct native modules if needed.
+4. [Run your truly *native* mobile app with NativeScript!](#run-for-first-time)
 
 ## Example
 
 A sample root component, **app.component.ts**:
 
+**BEFORE**:
 ```
-import { Component } from '@wwwalkerrun/nativescript-ngx-magic';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
+})
+export class AppComponent {}
+```
+
+**AFTER**:
+```
+import { Component } from '@wwwalkerrun/nativescript-ngx-magic'; // notice!
+
+@Component({
+  // notice! - Important to resolve path to templateUrl and/or styleUrls correctly
+  moduleId: module.id,
+  selector: 'app',
+  templateUrl: 'app.component.html', // notice! - removed leading './'
+  styleUrls: ['app.component.css'] // notice! - removed leading './'
 })
 export class AppComponent {}
 ```
@@ -49,7 +66,7 @@ Then create a `.tns.html` NativeScript view template for this component, for exa
 </StackLayout>
 ```
 
-Then if your component has `styleUrls` defined, you can create a `.tns.css` file, for example:
+Then if your component has `styleUrls` defined, create a `.tns.css` file, for example:
 
 * `app.component.tns.css`:
 
